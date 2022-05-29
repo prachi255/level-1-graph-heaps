@@ -1,0 +1,42 @@
+    // write all your codes here
+      boolean [] visited=new boolean[vtces];
+      Hpaths(graph,visited,""+src,src,src,0);
+     
+      
+   }
+   public static void Hpaths( ArrayList<Edge>[] graph, boolean [] visited, String psf,int src,int osrc,int cnt){
+       //base case
+       if(cnt==graph.length-1){
+           //hamiltonian path found
+           boolean isCycle=false;
+           System.out.print(psf);
+           for(Edge e:graph[src]){
+               if(e.nbr==osrc){
+                 isCycle=true;
+                 break;
+               }
+           }
+           
+           if(isCycle==true){
+               System.out.println("*");
+           }
+           else{
+               System.out.println(".");
+           }
+           return;
+       }
+       
+       //pre work
+       visited[src]=true;
+       
+       //rec calls
+       for(Edge e:graph[src]){
+           if(visited[e.nbr]==false){
+               Hpaths(graph,visited,psf+e.nbr,e.nbr,osrc,cnt+1);
+           }
+       }
+       
+       visited[src]=false;
+       
+       
+     }
