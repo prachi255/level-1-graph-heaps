@@ -1,0 +1,25 @@
+ public static boolean hasCycle(ArrayList<Edge>[] graph, boolean[] vis,int src){
+      Queue<Integer> q=new ArrayDeque();
+      q.add(src);
+while(q.size()>0){
+   int vt=q.remove();
+   if(vis[vt]==true){
+      return true;
+   }
+   vis[vt]=true;
+
+   for(var e:graph[vt]){
+      if(vis[e.nbr]==false){
+         q.add(e.nbr);
+      }
+   }
+}
+
+return false;
+
+
+
+
+
+
+   }
