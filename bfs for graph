@@ -1,0 +1,31 @@
+   int src = Integer.parseInt(br.readLine());
+
+      // write your code here  
+      boolean vis[]=new boolean[vtces];
+      Queue<pair> q=new ArrayDeque<>();
+      q.add(new pair(src,""+src));
+
+      while(q.size()>0){
+         pair curr=q.remove();
+         if(vis[curr.src]==true){
+            continue;
+         }
+         vis[curr.src]=true;
+         System.out.println(curr.src+"@"+curr.psf);
+
+         for(var e:graph[curr.src]){
+            if(vis[e.nbr]==false){
+               q.add(new pair(e.nbr,curr.psf+e.nbr));
+            }
+         }
+        
+      }
+   }
+   static class pair{
+      int src;
+      String psf;
+      pair(int src,String psf){
+         this.src=src;
+         this.psf=psf;
+      }
+   }
