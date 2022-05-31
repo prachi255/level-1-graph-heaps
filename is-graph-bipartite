@@ -1,0 +1,52 @@
+ public class pair{
+        int v;
+        int level;
+        pair(int v,int l){
+            this.v=v;
+            this.level=l;
+        }
+    }
+    public boolean isBipartite(int[][] graph) {
+        int vts=graph.length;
+        //we will fill level in visited
+        int[]vis=new int[vts];
+        Arrays.fill(vis,-1);
+        
+        //checking for all comp to be bipartite or non
+        for(int i=0;i<vts;i++){
+            if(vis[i]==-1){
+                boolean isbipartite=check(vis,graph,i);
+                if(isbipartite==false){
+                    return false;
+                }
+            }
+        }
+        return true;
+        
+    }
+    public boolean check(int[]vis, int[][] graph,int src){
+        //bfs
+        Queue<pair> q=new ArrayDeque<>();
+        q.add(new pair(src,0));
+        
+        while(q.size()>0){
+            pair curr=q.remove();
+            if(vis[curr.v]!=-1){
+                if(curr.level!=vis[curr.v]){
+                    return false;
+                }
+                
+            }
+            else{
+                vis[curr.v]=curr.level;
+            }
+            
+            for(int edges:graph[curr.v]){
+                if(vis[edges]==-1){
+                    q.add(new pair(edges,curr.level+1));
+                }
+            }
+        }
+        
+        return true;
+    }
